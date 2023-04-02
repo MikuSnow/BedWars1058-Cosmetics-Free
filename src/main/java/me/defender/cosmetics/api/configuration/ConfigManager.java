@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.cryptomorin.xseries.XMaterial;
 import me.defender.cosmetics.api.util.SkullUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;

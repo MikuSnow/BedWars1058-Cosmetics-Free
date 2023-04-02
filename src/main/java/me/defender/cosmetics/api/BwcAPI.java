@@ -131,6 +131,13 @@ public class BwcAPI {
     public Boolean isProxy(){
         return Bukkit.getPluginManager().getPlugin("BedWarsProxy") != null;
     }
+    /**
+     * Check if the plugin is running on a proxy.
+     * @return true if running on a proxy.
+     */
+    public Boolean isStandalone(){
+        return !isProxy() && Bukkit.getPluginManager().getPlugin("BedWars1058") == null;
+    }
 
 
 

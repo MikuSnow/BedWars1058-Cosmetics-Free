@@ -101,7 +101,7 @@ public class UsefulUtilsVD
     }
     
     public static ItemStack gethead(final String value, final String name) {
-        final ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
+        final ItemStack head = new ItemStack(Material.PLAYER_HEAD, 1);
         final SkullMeta meta = (SkullMeta)head.getItemMeta();
         GameProfile profile = new GameProfile(UUID.randomUUID(), "");
         profile.getProperties().put("textures", new Property("textures", value));

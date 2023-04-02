@@ -5,3 +5,4 @@ prefix: BW1058-Cosmetics
 softdepend: [ BedWars1058, BedwarsProxy, Vault, Citizens, PlaceholderAPI, WorldEdit ]
 author: IamTheDefender
 description: This addon adds a set of various cosmetics to your bedwars server
+api-version: 1.13

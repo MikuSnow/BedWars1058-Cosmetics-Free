@@ -152,6 +152,9 @@ public class Utility {
         if (api.isProxy()) {
             return com.andrei1058.bedwars.proxy.language.Language.getMsg(p, path);
         }
+        if (api.isStandalone()) {
+            return Cosmetics.getInstance().getLanguageUtil().getMsg(p, path);
+        }
         return Language.getMsg(p, path);
     }
 
@@ -165,6 +168,9 @@ public class Utility {
         BwcAPI api = new BwcAPI();
         if (api.isProxy()) {
             return BedWarsProxy.getAPI().getLanguageUtil().getList(p, path);
+        }
+        if (api.isStandalone()) {
+            return Cosmetics.getInstance().getLanguageUtil().getList(p, path);
         }
         return Language.getList(p, path);
     }
@@ -180,6 +186,10 @@ public class Utility {
             BedWarsProxy.getAPI().getLanguageUtil().saveIfNotExists(path, ob);
             return;
         }
+        if (api.isStandalone()) {
+            Cosmetics.getInstance().getLanguageUtil().saveIfNotExists(path, ob);
+            return;
+        }
         Language.saveIfNotExists(path, ob);
     }
 
@@ -190,8 +200,9 @@ public class Utility {
      */
     public static boolean isInArena(Player p) {
         BwcAPI api = new BwcAPI();
-        if (api.isProxy())
+        if (api.isProxy() || api.isStandalone()) {
             return false;
+        }
         return api.getBwAPI().getArenaUtil().getArenaByPlayer(p) != null;
     }
 

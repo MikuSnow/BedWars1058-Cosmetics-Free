@@ -18,6 +18,8 @@ import me.defender.cosmetics.database.PlayerData;
 import me.defender.cosmetics.database.PlayerOwnedData;
 import me.defender.cosmetics.database.mysql.MySQL;
 import me.defender.cosmetics.database.sqlite.SQLite;
+import me.defender.cosmetics.language.LanguageManager;
+import me.defender.cosmetics.language.LanguageUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.FileOutputStream;
@@ -31,6 +33,7 @@ import java.util.HashMap;
 
 public class Cosmetics extends JavaPlugin
 {
+    private static Cosmetics instance;
     public MainMenuData menuData;
     public static HikariDataSource db;
     @Getter
@@ -40,6 +43,7 @@ public class Cosmetics extends JavaPlugin
 
     @Override
     public void onEnable() {
+        instance = this;
         if(!StartupUtils.checkDependencies()){
             getLogger().severe("Cosmetics addon will now disable, make sure you have all dependencies installed!");
             getServer().getPluginManager().disablePlugin(this);
@@ -47,6 +51,7 @@ public class Cosmetics extends JavaPlugin
             return;
         }
 
+        LanguageManager.init();
         getLogger().info("All dependencies found, continuing with plugin startup.");
         HCore.initialize(this);
         // Download Glyphs
@@ -151,6 +156,14 @@ public class Cosmetics extends JavaPlugin
 
     public static void setPlaceholderAPI(boolean placeholderAPI) {
         Cosmetics.placeholderAPI = placeholderAPI;
+    }
+
+    public static Cosmetics getInstance() {
+        return instance;
+    }
+
+    public LanguageUtil getLanguageUtil() {
+        return LanguageManager.get();
     }
 }
 

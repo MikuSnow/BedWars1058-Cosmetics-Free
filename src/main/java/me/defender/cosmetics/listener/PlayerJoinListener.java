@@ -18,6 +18,7 @@ import me.defender.cosmetics.api.category.woodskins.WoodSkin;
 import me.defender.cosmetics.api.util.Utility;
 import me.defender.cosmetics.database.PlayerData;
 import me.defender.cosmetics.database.PlayerOwnedData;
+import me.defender.cosmetics.language.LanguageManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -32,6 +33,7 @@ public class PlayerJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         BwcAPI api = new BwcAPI();
 
+        LanguageManager.get().setPlayerLanguage(event.getPlayer(), "cn", true);
         // Saving for MySQL is different
         if (api.isMySQL()) {
             PlayerData playerData = new PlayerData(event.getPlayer().getUniqueId());

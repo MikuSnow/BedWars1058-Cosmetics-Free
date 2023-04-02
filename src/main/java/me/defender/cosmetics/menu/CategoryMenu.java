@@ -66,10 +66,11 @@ public class CategoryMenu extends InventoryGui {
         ConfigManager configManager = cosmeticsType.getConfig();
         ConfigurationSection section = config.getYml().getConfigurationSection(cosmeticsType.getSectionKey());
         if(section == null) return;
-        Map<ClickableItem, RarityType> rarityMap = new HashMap<>();
+        LinkedHashMap<ClickableItem, RarityType> rarityMap = new LinkedHashMap<>();
 
         // Set up the items
-        for(String id : section.getKeys(false)) {
+        Set<String> keys = section.getKeys(false);
+        for(String id : keys) {
             // set the variables
             String path = cosmeticsType.getSectionKey() + "." + id + ".";
 
@@ -103,15 +104,16 @@ public class CategoryMenu extends InventoryGui {
                 });
             }
             if(item != null) {
-                items.add(item);
+//                items.add(item);
                 rarityMap.put(item, rarity);
             }
         }
         // Page system
         Pagination pages = new Pagination(this);
         pages.setSlots(slots);
+//        pages.setItems(items);
+        addItemsAccordingToRarity(rarityMap, items);
         pages.setItems(items);
-        addItemsAccordingToRarity(rarityMap);
         if(Utility.plugin().getConfig().getBoolean("BackItemInCosmeticsMenu")) {
             setItem(49, HCore.itemBuilder(Material.ARROW).name(true, "&aBack").build(), (e) -> {
                 Utility.openMainMenu((Player) e.getWhoClicked());
@@ -129,18 +131,19 @@ public class CategoryMenu extends InventoryGui {
         }
         return -1;
     }
-    
+
     public boolean isFull(Inventory inventory){
         return findFirstEmptySlot(inventory) == -1;
     }
 
-    public void addItemsAccordingToRarity(Map<ClickableItem, RarityType> rarityMap){
+    public void addItemsAccordingToRarity(LinkedHashMap<ClickableItem, RarityType> rarityMap, List<ClickableItem> items){
         List<ClickableItem> noneItems = new ArrayList<>();
         List<ClickableItem> randomItems = new ArrayList<>();
         List<ClickableItem> commonItems = new ArrayList<>();
         List<ClickableItem> rareItems = new ArrayList<>();
         List<ClickableItem> epicItems = new ArrayList<>();
         List<ClickableItem> legendaryItems = new ArrayList<>();
+        List<ClickableItem> ultimateItems = new ArrayList<>();
 
         for (Map.Entry<ClickableItem, RarityType> entry : rarityMap.entrySet()) {
             ClickableItem item = entry.getKey();
@@ -164,14 +167,18 @@ public class CategoryMenu extends InventoryGui {
                 case LEGENDARY:
                     legendaryItems.add(item);
                     break;
+                case ULTIMATE:
+                    ultimateItems.add(item);
+                    break;
             }
         }
-        noneItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        randomItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        commonItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        rareItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        epicItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
-        legendaryItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
+//        noneItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
+//        randomItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
+//        commonItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
+//        rareItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
+//        epicItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
+//        legendaryItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
+//        ultimateItems.sort(Comparator.comparing((ClickableItem item) -> ChatColor.stripColor(item.getItem().getItemMeta().getDisplayName())));
 
 
 
@@ -179,36 +186,49 @@ public class CategoryMenu extends InventoryGui {
             if(!isFull(toInventory())) {
                 super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
             }
+            items.add(clickableItem);
         }
 
         for (ClickableItem clickableItem : randomItems) {
             if(!isFull(toInventory())) {
                 super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
             }
+            items.add(clickableItem);
         }
 
         for (ClickableItem clickableItem : commonItems) {
             if(!isFull(toInventory())) {
                 super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
             }
+            items.add(clickableItem);
         }
 
         for (ClickableItem clickableItem : rareItems) {
             if(!isFull(toInventory())) {
                 super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
             }
+            items.add(clickableItem);
         }
 
         for (ClickableItem clickableItem : epicItems) {
             if(!isFull(toInventory())) {
                 super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
             }
+            items.add(clickableItem);
         }
 
         for (ClickableItem clickableItem : legendaryItems) {
             if(!isFull(toInventory())) {
                 super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
             }
+            items.add(clickableItem);
+        }
+
+        for (ClickableItem clickableItem : ultimateItems) {
+            if(!isFull(toInventory())) {
+                super.setItem(findFirstEmptySlot(toInventory()), clickableItem);
+            }
+            items.add(clickableItem);
         }
 
     }
@@ -260,7 +280,7 @@ public class CategoryMenu extends InventoryGui {
                     XSound.ENTITY_VILLAGER_NO.play(p);
                 }
                 // Purchase
-        } else if (eco != null && eco.getBalance(Bukkit.getOfflinePlayer(p.getUniqueId())) >= price) {
+            } else if (eco != null && eco.getBalance(Bukkit.getOfflinePlayer(p.getUniqueId())) >= price) {
                 if(isOnlyForCheck) return 1;
                 CosmeticPurchaseEvent event = new CosmeticPurchaseEvent(p, type);
                 Bukkit.getServer().getPluginManager().callEvent(event);
