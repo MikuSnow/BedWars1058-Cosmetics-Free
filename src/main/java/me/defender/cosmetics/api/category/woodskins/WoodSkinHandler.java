@@ -35,21 +35,17 @@ public class WoodSkinHandler implements Listener
         for(WoodSkin woodSkin : StartupUtils.woodSkinsList){
             if(woodSkin.getIdentifier().equals(selected)){
                 ItemStack stack = woodSkin.woodSkin();
-                byte data = Byte.parseByte(String.valueOf(stack.getDurability()));
                 Material type = stack.getType();
                 if(e.getBlock().getType() != type) e.getBlock().setType(type);
-                if(e.getBlock().getData() != data) e.getBlock().setData(data);
             }
         }
-
-
     }
 
 
     @EventHandler
     public void onBuy(ShopBuyEvent e) {
         Player p = e.getBuyer();
-        if (e.getCategoryContent().getItemStack(p).getType() == Material.WOOD) {
+        if (e.getCategoryContent().getItemStack(p).getType() == Material.OAK_PLANKS || e.getCategoryContent().getItemStack(p).getType() == Material.OAK_WOOD) {
              String selected = new BwcAPI().getSelectedCosmetic(p, CosmeticsType.WoodSkins);
             
             BedWars bedwarsAPI = new BwcAPI().getBwAPI();

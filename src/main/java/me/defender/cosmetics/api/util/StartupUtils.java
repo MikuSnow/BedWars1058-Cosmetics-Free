@@ -31,7 +31,6 @@ import me.defender.cosmetics.api.category.woodskins.WoodSkin;
 import me.defender.cosmetics.api.category.victorydances.VictoryDance;
 import me.defender.cosmetics.api.category.victorydances.VictoryDanceHandler;
 import me.defender.cosmetics.api.category.woodskins.WoodSkinHandler;
-import me.defender.cosmetics.api.category.woodskins.items.*;
 import me.defender.cosmetics.api.category.woodskins.items.log.*;
 import me.defender.cosmetics.api.category.deathcries.items.DeathCryItems;
 import me.defender.cosmetics.api.category.finalkilleffects.FinalKillEffectHandler;
@@ -44,6 +43,10 @@ import me.defender.cosmetics.api.category.glyphs.GlyphHandler;
 import me.defender.cosmetics.api.category.deathcries.DeathCryHandler;
 import me.defender.cosmetics.api.category.bedbreakeffects.BedDestroyHandler;
 import me.defender.cosmetics.api.category.sprays.items.SprayItems;
+import me.defender.cosmetics.api.category.woodskins.items.log_stripped.*;
+import me.defender.cosmetics.api.category.woodskins.items.wood_stripped.*;
+import me.defender.cosmetics.api.category.woodskins.items.planks.*;
+import me.defender.cosmetics.api.category.woodskins.items.wood.*;
 import me.defender.cosmetics.listener.*;
 import me.defender.cosmetics.support.placeholders.Placeholders;
 import org.bukkit.*;
@@ -79,7 +82,7 @@ public class StartupUtils
      @author defender
      */
     public static void registerEvents() {
-        if(!new BwcAPI().isProxy()){
+        if(!new BwcAPI().isStandalone()){
             HCore.registerListeners(new ShopKeeperHandler());
             HCore.registerListeners(new GlyphHandler());
             HCore.registerListeners(new KillMessageHandler());
@@ -116,11 +119,8 @@ public class StartupUtils
         File cubeFile = new File(Utility.plugin().getDataFolder().getPath() + "/IslandToppers/cube.schematic");
         // Save if not found
         if(cubeFile.exists()) return;
-        try {
-            Cosmetics.downloadFile(new URL("https://dl.dropboxusercontent.com/s/x9rmk36qa1uwrr3/idkcube.schematic"), cubeFile.getPath());
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        //TODO 改为本地
+//            Cosmetics.downloadFile(new URL("https://dl.dropboxusercontent.com/s/x9rmk36qa1uwrr3/idkcube.schematic"), cubeFile.getPath());
     }
 
     /**
@@ -139,7 +139,7 @@ public class StartupUtils
             tempFile.delete();
         }
         String[] filesInFolder = folder.list();
-        if(filesInFolder != null && filesInFolder.length == 0){
+        if(filesInFolder != null && filesInFolder.length != 0){
             return;
         }
         try {
@@ -177,9 +177,9 @@ public class StartupUtils
      */
     public static boolean checkDependencies(){
         Logger log = Bukkit.getLogger();
-        if(!isPluginEnabled("BedWars1058") && !new BwcAPI().isProxy()){
-            log.severe("Cosmetics addon requires BedWars1058 or BedWarsProxy to work!");
-            return false;
+        if(new BwcAPI().isStandalone()){
+            log.info("Cosmetics addon is working on Standalone mode!");
+            return true;
         }
         if(!isPluginEnabled("Vault")){
             log.severe("Cosmetics addon requires Vault to work properly!");
@@ -279,17 +279,48 @@ public class StartupUtils
         new guardians().register();
 
         // Wood Skins
-        new birchPlank().register();
+        new oakPlank().register();
         new acaciaPlank().register();
+        new birchPlank().register();
+        new crimsonPlank().register();
         new darkOakPlank().register();
         new junglePlank().register();
-        new oakPlank().register();
         new sprucePlank().register();
+        new warpedPlank().register();
         new acaciaLog().register();
         new birchLog().register();
+        new crimsonStem().register();
+        new darkOakLog().register();
         new jungleLog().register();
         new oakLog().register();
         new spruceLog().register();
+        new warpedStem().register();
+        new acaciaWood().register();
+        new birchWood().register();
+        new crimsonHyphae().register();
+        new darkOakWood().register();
+        new jungleWood().register();
+        new oakWood().register();
+        new spruceWood().register();
+        new warpedHyphae().register();
+        new strippedAcaciaLog().register();
+        new strippedBirchLog().register();
+        new strippedCrimsonStem().register();
+        new strippedDarkOakLog().register();
+        new strippedJungleLog().register();
+        new strippedOakLog().register();
+        new strippedSpruceLog().register();
+        new strippedWarpedStem().register();
+        new strippedAcaciaWood().register();
+        new strippedBirchWood().register();
+        new strippedCrimsonHyphae().register();
+        new strippedDarkOakWood().register();
+        new strippedJungleWood().register();
+        new strippedOakWood().register();
+        new strippedSpruceWood().register();
+        new strippedWarpedHyphae().register();
+
+
     }
 
 }

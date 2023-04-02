@@ -1,4 +1,4 @@
-package me.defender.cosmetics.api.category.woodskins.items.log;
+package me.defender.cosmetics.api.category.woodskins.items.wood;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.defender.cosmetics.api.category.woodskins.WoodSkin;
@@ -7,10 +7,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class oakLog extends WoodSkin {
+public class spruceWood extends WoodSkin {
     @Override
     public ItemStack getItem() {
-        return XMaterial.OAK_LOG.parseItem();
+        return XMaterial.SPRUCE_WOOD.parseItem();
     }
 
     @Override
@@ -20,17 +20,17 @@ public class oakLog extends WoodSkin {
 
     @Override
     public String getIdentifier() {
-        return "oak-log";
+        return "spruce-wood";
     }
 
     @Override
     public String getDisplayName() {
-        return "Oak Log";
+        return "Spruce Wood";
     }
 
     @Override
     public List<String> getLore() {
-        return List.of("&7Select the Oak Log Wood Skin", "&7to be used when placing wood", "&7blocks.");
+        return List.of("&7Select the Spruce Wood Skin", "&7to be used when placing wood", "&7blocks.");
     }
 
     @Override
@@ -45,6 +45,6 @@ public class oakLog extends WoodSkin {
 
     @Override
     public ItemStack woodSkin() {
-        return XMaterial.OAK_LOG.parseItem();
+        return XMaterial.SPRUCE_WOOD.parseItem();
     }
 }

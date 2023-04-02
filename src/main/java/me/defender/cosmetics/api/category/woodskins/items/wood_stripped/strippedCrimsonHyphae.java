@@ -1,4 +1,4 @@
-package me.defender.cosmetics.api.category.woodskins.items.log;
+package me.defender.cosmetics.api.category.woodskins.items.wood_stripped;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.defender.cosmetics.api.category.woodskins.WoodSkin;
@@ -7,10 +7,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class oakLog extends WoodSkin {
+public class strippedCrimsonHyphae extends WoodSkin {
     @Override
     public ItemStack getItem() {
-        return XMaterial.OAK_LOG.parseItem();
+        return XMaterial.STRIPPED_CRIMSON_HYPHAE.parseItem();
     }
 
     @Override
@@ -20,17 +20,17 @@ public class oakLog extends WoodSkin {
 
     @Override
     public String getIdentifier() {
-        return "oak-log";
+        return "stripped-crimson-hyphae";
     }
 
     @Override
     public String getDisplayName() {
-        return "Oak Log";
+        return "Stripped Crimson Hyphae";
     }
 
     @Override
     public List<String> getLore() {
-        return List.of("&7Select the Oak Log Wood Skin", "&7to be used when placing wood", "&7blocks.");
+        return List.of("&7Select the Stripped Crimson Hyphae Wood Skin", "&7to be used when placing wood", "&7blocks.");
     }
 
     @Override
@@ -40,11 +40,11 @@ public class oakLog extends WoodSkin {
 
     @Override
     public RarityType getRarity() {
-        return RarityType.LEGENDARY;
+        return RarityType.RARE;
     }
 
     @Override
     public ItemStack woodSkin() {
-        return XMaterial.OAK_LOG.parseItem();
+        return XMaterial.STRIPPED_CRIMSON_HYPHAE.parseItem();
     }
 }

@@ -34,7 +34,7 @@ public abstract class WoodSkin extends Cosmetics {
      * This method should be called when the plugin is enabled.
      */
     @Override
-    public void register(){
+    public void register() {
         // save to config
         String configPath = category + "." + getIdentifier() + ".";
         saveIfNotFound(type, configPath + "price", getPrice());
@@ -55,7 +55,7 @@ public abstract class WoodSkin extends Cosmetics {
         List<String> finalLore = new ArrayList<>();
         finalLore.addAll(Arrays.asList("&8Wood Skin", ""));
         finalLore.addAll(getLore());
-        finalLore.addAll(Arrays.asList("", "&7Rarity: {rarity}","&7Cost: &6{cost}", "", "{status}"));
+        finalLore.addAll(Arrays.asList("", "&7Rarity: {rarity}", "&7Cost: &6{cost}", "", "{status}"));
 
         saveIfNotExistsLang("cosmetics." + configPath + "lore", finalLore);
         StartupUtils.woodSkinsList.add(this);
@@ -63,14 +63,15 @@ public abstract class WoodSkin extends Cosmetics {
 
     /**
      * Get the topper's field
+     *
      * @param fields the field to get
-     * @param p the player to get the field
+     * @param p      the player to get the field
      * @return the field
      */
-    public Object getField(FieldsType fields, Player p){
+    public Object getField(FieldsType fields, Player p) {
         String configPath = category + "." + getIdentifier() + ".";
 
-        switch (fields){
+        switch (fields) {
             case NAME:
                 return Utility.getMSGLang(p, "cosmetics." + configPath + "name");
             case PRICE:
@@ -88,12 +89,14 @@ public abstract class WoodSkin extends Cosmetics {
 
     /**
      * Get the wood skin's item
+     *
      * @return the item
      */
     public abstract ItemStack woodSkin();
 
     /**
      * Get default wood skin
+     *
      * @param player the player to get the default wood skin
      * @return the default wood skin
      */

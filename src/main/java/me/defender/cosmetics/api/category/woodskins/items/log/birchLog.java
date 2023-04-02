@@ -35,7 +35,7 @@ public class birchLog extends WoodSkin {
 
     @Override
     public int getPrice() {
-        return 50000;
+        return 60000;
     }
 
     @Override

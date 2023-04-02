@@ -1,4 +1,4 @@
-package me.defender.cosmetics.api.category.woodskins.items;
+package me.defender.cosmetics.api.category.woodskins.items.wood;
 
 import com.cryptomorin.xseries.XMaterial;
 import me.defender.cosmetics.api.category.woodskins.WoodSkin;
@@ -7,10 +7,10 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class sprucePlank extends WoodSkin {
+public class darkOakWood extends WoodSkin {
     @Override
     public ItemStack getItem() {
-        return XMaterial.SPRUCE_PLANKS.parseItem();
+        return XMaterial.DARK_OAK_WOOD.parseItem();
     }
 
     @Override
@@ -20,31 +20,31 @@ public class sprucePlank extends WoodSkin {
 
     @Override
     public String getIdentifier() {
-        return "spruce-plank";
+        return "dark-oak-wood";
     }
 
     @Override
     public String getDisplayName() {
-        return "Spruce Plank";
+        return "Dark Oak Wood";
     }
 
     @Override
     public List<String> getLore() {
-        return List.of("&7Select the Spruce Plank Wood Skin", "&7to be used when placing wood", "&7blocks.");
+        return List.of("&7Select the Dark Oak Wood Skin", "&7to be used when placing wood", "&7blocks.");
     }
 
     @Override
     public int getPrice() {
-        return 20000;
+        return 60000;
     }
 
     @Override
     public RarityType getRarity() {
-        return RarityType.RARE;
+        return RarityType.LEGENDARY;
     }
 
     @Override
     public ItemStack woodSkin() {
-        return XMaterial.SPRUCE_PLANKS.parseItem();
+        return XMaterial.DARK_OAK_WOOD.parseItem();
     }
 }

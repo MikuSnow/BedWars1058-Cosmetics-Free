@@ -35,7 +35,7 @@ public class jungleLog extends WoodSkin {
 
     @Override
     public int getPrice() {
-        return 55000;
+        return 60000;
     }
 
     @Override
